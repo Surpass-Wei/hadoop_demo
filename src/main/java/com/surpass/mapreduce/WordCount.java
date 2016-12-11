@@ -1,5 +1,6 @@
 package com.surpass.mapreduce;
 
+import com.surpass.util.FileUtil;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
@@ -11,7 +12,6 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.GenericOptionsParser;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.StringTokenizer;
 
@@ -61,12 +61,13 @@ public class WordCount {
     }
 
     public static void main(String[] args) throws Exception {
+        System.setProperty("hadoop.home.dir", "D:\\GreenSoft\\Apache\\hadoop-2.6.5");
+
         Configuration conf = new Configuration();
         //  获取输入输出路径
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
 
-        File outputDir = new File(otherArgs[1]);
-
+        FileUtil.delDir("output");
 
         if(otherArgs.length!=2) {
             System.out.println("Usage: wordcount <input> <output>");
