@@ -61,13 +61,14 @@ public class WordCount {
     }
 
     public static void main(String[] args) throws Exception {
-        System.setProperty("hadoop.home.dir", "D:\\GreenSoft\\Apache\\hadoop-2.6.5");
+        System.setProperty("hadoop.home.dir", "C:\\Program Files (x86)\\Apache\\hadoop-2.6.5");
 
         Configuration conf = new Configuration();
         //  获取输入输出路径
         String[] otherArgs = new GenericOptionsParser(conf, args).getRemainingArgs();
 
-        FileUtil.delDir("output");
+        //  如果输出目录已存在，则要事先删除，否则会报错
+        FileUtil.delDir(otherArgs[1]);
 
         if(otherArgs.length!=2) {
             System.out.println("Usage: wordcount <input> <output>");
